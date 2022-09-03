@@ -32,18 +32,18 @@ window.addEventListener('load', () => {
     status.innerText = defaultHeaderText
     status.style.color = '#000'
     scoreContainer.style.color = '#000'
-  })
 
-  container.addEventListener('mouseover', (e) => {
-    if (e.target.matches('.boundary')) {
-      boundaries.forEach((boundary) => {
-        boundary.style.backgroundColor = '#ea0505'
-      })
-      status.innerText = 'You Lost!'
-      status.style.color = '#ea0505'
-      score -= 10
-      scoreContainer.innerHTML = score
-      scoreContainer.style.color = '#fff'
-    }
+    container.addEventListener('mouseover', (e) => {
+      if (e.target.matches('.boundary')) {
+        boundaries.forEach((boundary) => {
+          boundary.style.backgroundColor = '#ea0505'
+        })
+        status.innerText = 'You Lost!'
+        status.style.color = '#ea0505'
+        score -= 10
+        scoreContainer.innerHTML = score
+        scoreContainer.style.color = '#fff'
+      }
+    })
   })
 })
