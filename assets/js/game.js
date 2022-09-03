@@ -10,7 +10,7 @@ window.addEventListener('load', () => {
   const wonMsg = 'You won :)'
   var isStartHovered = false
   var isBoundaryTouched = false
-  var isOutsideHovered = false
+  var isOutsideHovered = true
 
   scoreContainer.innerHTML = score
   scoreContainer.style.color = '#000'
@@ -28,21 +28,27 @@ window.addEventListener('load', () => {
     status.style.color = '#000'
   })
 
-  document.body.addEventListener('mouseover', (body_event) => {
+  document.body.addEventListener('mouseover', (e) => {
     if (
-      !body_event.target.matches('#start') &&
-      !body_event.target.matches('#end') &&
-      !body_event.target.matches('.boundary')
+      !e.target.matches('#game') &&
+      !e.target.matches('#start') &&
+      !e.target.matches('#end') &&
+      !e.target.matches('.boundary')
     ) {
       isOutsideHovered = true
     } else {
-      isOutsideHovered = false
-    }
-  })
-
-  startButton.addEventListener('mouseover', () => {
-    container.addEventListener('mouseover', (e) => {
-      if (e.target.matches('.boundary') && isStartHovered) {
+      //   isOutsideHovered = false
+      if (e.target.matches('#start')) {
+        isStartHovered = true
+        isBoundaryTouched = false
+        isOutsideHovered = false
+        boundaries.forEach((boundary) => {
+          boundary.style.backgroundColor = '#eeeeee'
+        })
+        status.innerText = defaultHeaderText
+        status.style.color = '#000'
+        scoreContainer.style.color = '#000'
+      } else if (e.target.matches('.boundary') && isStartHovered) {
         isBoundaryTouched = true
         boundaries.forEach((boundary) => {
           boundary.style.backgroundColor = '#ea0505'
@@ -52,22 +58,21 @@ window.addEventListener('load', () => {
         scoreContainer.style.color = '#fff'
         status.innerText = lostMsg
         status.style.color = '#ea0505'
-      } else if (e.target.matches('#start')) {
-        isStartHovered = true
-        boundaries.forEach((boundary) => {
-          boundary.style.backgroundColor = '#eeeeee'
-        })
-        status.innerText = defaultHeaderText
-        status.style.color = '#000'
-        scoreContainer.style.color = '#000'
-      } else if (e.target.matches('#end') && isStartHovered) {
-        console.log('hovered')
+      } else if (
+        e.target.matches('#end') &&
+        isStartHovered &&
+        !isOutsideHovered &&
+        !isBoundaryTouched
+      ) {
         score += 5
         scoreContainer.innerHTML = score
-        scoreContainer.style.color = '#fff'
+        scoreContainer.style.color = '#000'
         status.innerText = wonMsg
         status.style.color = '#08660e'
+        isStartHovered = false
+        isBoundaryTouched = false
+        isOutsideHovered = true
       }
-    })
+    }
   })
 })
