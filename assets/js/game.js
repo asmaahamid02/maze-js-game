@@ -28,13 +28,21 @@ window.addEventListener('load', () => {
     score = 0
     //reset score value
     changeText(scoreContainer, score)
-    scoreContainer.style.color = '#000'
+    //change score color
+    changeColor(scoreContainer, '#000')
+    // reset header text
     changeText(status, defaultHeaderText)
-    status.style.color = '#000'
+    //change header color
+    changeColor(status, color)
+    // status.style.color = '#000'
   }
 
   function changeText(element, text) {
     element.innerHTML = text
+  }
+
+  function changeColor(element, color) {
+    element.style.color = color
   }
   document.body.addEventListener('mouseover', (e) => {
     if (
