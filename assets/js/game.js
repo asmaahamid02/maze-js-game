@@ -71,24 +71,29 @@ window.addEventListener('load', () => {
     reset()
   })
 
+  //function that reset variables to their initial values
   function reset() {
     score = 0
     //change score text and color, change status text and color
     changeScoreAndStatus('#000', defaultHeaderText, '#000')
   }
 
+  //function that change the text of element
   function changeText(element, text) {
     element.innerHTML = text
   }
 
+  //function that change the color of element
   function changeColor(element, color) {
     element.style.color = color
   }
 
+  //function that change the background color of element
   function changeBackgroundColor(element, color) {
     element.style.backgroundColor = color
   }
 
+  //function that change the text and color of score and header
   function changeScoreAndStatus(scoreColor, statusText, statusColor) {
     //change score value
     changeText(scoreContainer, score)
