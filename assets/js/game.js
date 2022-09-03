@@ -26,13 +26,6 @@ window.addEventListener('load', () => {
   })
 
   startButton.addEventListener('mouseover', () => {
-    boundaries.forEach((boundary) => {
-      boundary.style.backgroundColor = '#eeeeee'
-    })
-    status.innerText = defaultHeaderText
-    status.style.color = '#000'
-    scoreContainer.style.color = '#000'
-
     container.addEventListener('mouseover', (e) => {
       if (e.target.matches('.boundary')) {
         boundaries.forEach((boundary) => {
@@ -43,6 +36,13 @@ window.addEventListener('load', () => {
         score -= 10
         scoreContainer.innerHTML = score
         scoreContainer.style.color = '#fff'
+      } else if (e.target.matches('#start')) {
+        boundaries.forEach((boundary) => {
+          boundary.style.backgroundColor = '#eeeeee'
+        })
+        status.innerText = defaultHeaderText
+        status.style.color = '#000'
+        scoreContainer.style.color = '#000'
       }
     })
   })
