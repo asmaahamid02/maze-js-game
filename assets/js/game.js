@@ -21,13 +21,16 @@ window.addEventListener('load', () => {
     boundaries.forEach((boundary) => {
       boundary.style.backgroundColor = '#eeeeee'
     })
+    reset()
+  })
+
+  function reset() {
     score = 0
     scoreContainer.innerHTML = score
     scoreContainer.style.color = '#000'
     status.innerText = defaultHeaderText
     status.style.color = '#000'
-  })
-
+  }
   document.body.addEventListener('mouseover', (e) => {
     if (
       !e.target.matches('#game') &&
