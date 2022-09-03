@@ -10,6 +10,7 @@ window.addEventListener('load', () => {
   const wonMsg = 'You won :)'
   var isStartHovered = false
   var isBoundaryTouched = false
+  var isOutsideHovered = false
 
   scoreContainer.innerHTML = score
   scoreContainer.style.color = '#000'
@@ -25,6 +26,18 @@ window.addEventListener('load', () => {
     scoreContainer.style.color = '#000'
     status.innerText = defaultHeaderText
     status.style.color = '#000'
+  })
+
+  document.body.addEventListener('mouseover', (body_event) => {
+    if (
+      !body_event.target.matches('#start') &&
+      !body_event.target.matches('#end') &&
+      !body_event.target.matches('.boundary')
+    ) {
+      isOutsideHovered = true
+    } else {
+      isOutsideHovered = false
+    }
   })
 
   startButton.addEventListener('mouseover', () => {
