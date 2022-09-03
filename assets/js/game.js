@@ -8,6 +8,8 @@ window.addEventListener('load', () => {
   const startButton = document.querySelector('#start')
   const lostMsg = 'You Lost!'
   const wonMsg = 'You won :)'
+  var isStartHovered = false
+  var isBoundaryTouched = false
 
   scoreContainer.innerHTML = score
   scoreContainer.style.color = '#000'
@@ -27,22 +29,31 @@ window.addEventListener('load', () => {
 
   startButton.addEventListener('mouseover', () => {
     container.addEventListener('mouseover', (e) => {
-      if (e.target.matches('.boundary')) {
+      if (e.target.matches('.boundary') && isStartHovered) {
+        isBoundaryTouched = true
         boundaries.forEach((boundary) => {
           boundary.style.backgroundColor = '#ea0505'
         })
-        status.innerText = 'You Lost!'
-        status.style.color = '#ea0505'
         score -= 10
         scoreContainer.innerHTML = score
         scoreContainer.style.color = '#fff'
+        status.innerText = lostMsg
+        status.style.color = '#ea0505'
       } else if (e.target.matches('#start')) {
+        isStartHovered = true
         boundaries.forEach((boundary) => {
           boundary.style.backgroundColor = '#eeeeee'
         })
         status.innerText = defaultHeaderText
         status.style.color = '#000'
         scoreContainer.style.color = '#000'
+      } else if (e.target.matches('#end') && isStartHovered) {
+        console.log('hovered')
+        score += 5
+        scoreContainer.innerHTML = score
+        scoreContainer.style.color = '#fff'
+        status.innerText = wonMsg
+        status.style.color = '#08660e'
       }
     })
   })
