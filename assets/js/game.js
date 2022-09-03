@@ -13,41 +13,11 @@ window.addEventListener('load', () => {
   var isOutsideHovered = true
   scoreContainer.style.textAlign = 'center'
 
-  scoreContainer.innerHTML = score
-  scoreContainer.style.color = '#000'
+  //change score value
+  changeText(scoreContainer, score)
+  //change score text color
+  changeColor(scoreContainer, '#000')
 
-  //reset button -- to reset game settings
-  startButton.addEventListener('click', () => {
-    boundaries.forEach((boundary) => {
-      boundary.style.backgroundColor = '#eeeeee'
-    })
-    reset()
-  })
-
-  function reset() {
-    score = 0
-    //reset score value
-    changeText(scoreContainer, score)
-    //change score color
-    changeColor(scoreContainer, '#000')
-    // reset header text
-    changeText(status, defaultHeaderText)
-    //change header color to black
-    changeColor(status, '#000')
-    // status.style.color = '#000'
-  }
-
-  function changeText(element, text) {
-    element.innerHTML = text
-  }
-
-  function changeColor(element, color) {
-    element.style.color = color
-  }
-
-  function changeBackgroundColor(element, color) {
-    element.style.backgroundColor = color
-  }
   document.body.addEventListener('mouseover', (e) => {
     if (
       !e.target.matches('#game') &&
@@ -63,30 +33,20 @@ window.addEventListener('load', () => {
         isBoundaryTouched = false
         isOutsideHovered = false
         boundaries.forEach((boundary) => {
-          //change background color of the boundery
+          //change background color of the boundery to light gray
           changeBackgroundColor(boundary, '#eeeeee')
         })
-        //change header text
-        changeText(status, defaultHeaderText)
-        //change header color to black
-        changeColor(status, '#000')
-        //change score text color to black
-        changeColor(scoreContainer, '#000')
+        //change score text and color, change status text and color
+        changeScoreAndStatus('#000', defaultHeaderText, '#000')
       } else if (e.target.matches('.boundary') && isStartHovered) {
         isBoundaryTouched = true
         boundaries.forEach((boundary) => {
-          //change background color of the boundery
+          //change background color of the boundery to red
           changeBackgroundColor(boundary, '#ea0505')
         })
         score -= 10
-        //change score value
-        changeText(scoreContainer, score)
-        //change score text color to white
-        changeColor(scoreContainer, '#fff')
-        //change message to "you lost"
-        changeText(status, lostMsg)
-        //change header color to red
-        changeColor(status, '#ea0505')
+        //change score text and color, change status text and color
+        changeScoreAndStatus('#fff', lostMsg, '#ea0505')
       } else if (
         e.target.matches('#end') &&
         isStartHovered &&
@@ -94,18 +54,49 @@ window.addEventListener('load', () => {
         !isBoundaryTouched
       ) {
         score += 5
-        //change score value
-        changeText(scoreContainer, score)
-        //change score text color to black
-        changeColor(scoreContainer, '#000')
-        //change message to "you won"
-        changeText(status, wonMsg)
-        //change header color to green
-        changeColor(status, '#08660e')
+        //change score text and color, change status text and color
+        changeScoreAndStatus('#000', wonMsg, '#08660e')
         isStartHovered = false
         isBoundaryTouched = false
         isOutsideHovered = true
       }
     }
   })
+  //reset button -- to reset game settings
+  startButton.addEventListener('click', () => {
+    boundaries.forEach((boundary) => {
+      //change background color of the boundery to light gray
+      changeBackgroundColor(boundary, '#eee')
+    })
+    reset()
+  })
+
+  function reset() {
+    score = 0
+    //change score text and color, change status text and color
+    changeScoreAndStatus('#000', defaultHeaderText, '#000')
+  }
+
+  function changeText(element, text) {
+    element.innerHTML = text
+  }
+
+  function changeColor(element, color) {
+    element.style.color = color
+  }
+
+  function changeBackgroundColor(element, color) {
+    element.style.backgroundColor = color
+  }
+
+  function changeScoreAndStatus(scoreColor, statusText, statusColor) {
+    //change score value
+    changeText(scoreContainer, score)
+    //change score text color to black
+    changeColor(scoreContainer, scoreColor)
+    //change header text
+    changeText(status, statusText)
+    //change header color to black
+    changeColor(status, statusColor)
+  }
 })
