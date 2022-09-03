@@ -25,6 +25,15 @@ window.addEventListener('load', () => {
     status.style.color = '#000'
   })
 
+  startButton.addEventListener('mouseover', () => {
+    boundaries.forEach((boundary) => {
+      boundary.style.backgroundColor = '#eeeeee'
+    })
+    status.innerText = defaultHeaderText
+    status.style.color = '#000'
+    scoreContainer.style.color = '#000'
+  })
+
   container.addEventListener('mouseover', (e) => {
     if (e.target.matches('.boundary')) {
       boundaries.forEach((boundary) => {
