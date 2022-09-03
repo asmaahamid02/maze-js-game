@@ -32,8 +32,8 @@ window.addEventListener('load', () => {
     changeColor(scoreContainer, '#000')
     // reset header text
     changeText(status, defaultHeaderText)
-    //change header color
-    changeColor(status, color)
+    //change header color to black
+    changeColor(status, '#000')
     // status.style.color = '#000'
   }
 
@@ -63,8 +63,12 @@ window.addEventListener('load', () => {
         })
         //change header text
         changeText(status, defaultHeaderText)
-        status.style.color = '#000'
-        scoreContainer.style.color = '#000'
+        //change header color to black
+        changeColor(status, '#000')
+        // status.style.color = '#000'
+        //change score text color to black
+        changeColor(scoreContainer, '#000')
+        // scoreContainer.style.color = '#000'
       } else if (e.target.matches('.boundary') && isStartHovered) {
         isBoundaryTouched = true
         boundaries.forEach((boundary) => {
@@ -73,10 +77,14 @@ window.addEventListener('load', () => {
         score -= 10
         //change score value
         changeText(scoreContainer, score)
-        scoreContainer.style.color = '#fff'
+        //change score text color to white
+        changeColor(scoreContainer, '#fff')
+        // scoreContainer.style.color = '#fff'
         //change message to "you lost"
         changeText(status, lostMsg)
-        status.style.color = '#ea0505'
+        //change header color to red
+        changeColor(status, '#ea0505')
+        // status.style.color = '#ea0505'
       } else if (
         e.target.matches('#end') &&
         isStartHovered &&
@@ -86,10 +94,14 @@ window.addEventListener('load', () => {
         score += 5
         //change score value
         changeText(scoreContainer, score)
-        scoreContainer.style.color = '#000'
+        //change score text color to black
+        changeColor(scoreContainer, '#000')
+        // scoreContainer.style.color = '#000'
         //change message to "you won"
         changeText(status, wonMsg)
-        status.style.color = '#08660e'
+        //change header color to green
+        changeColor(status, '#08660e')
+        // status.style.color = '#08660e'
         isStartHovered = false
         isBoundaryTouched = false
         isOutsideHovered = true
