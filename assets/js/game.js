@@ -7,7 +7,7 @@ window.addEventListener('load', () => {
   const scoreContainer = document.querySelector('.example')
   const startButton = document.querySelector('#start')
   const lostMsg = 'You Lost!'
-  const wonMsg = 'You won :)'
+  const wonMsg = 'You Won :)'
   var isStartHovered = false
   var isBoundaryTouched = false
   var isOutsideHovered = true
@@ -26,10 +26,15 @@ window.addEventListener('load', () => {
 
   function reset() {
     score = 0
-    scoreContainer.innerHTML = score
+    //reset score value
+    changeText(scoreContainer, score)
     scoreContainer.style.color = '#000'
-    status.innerText = defaultHeaderText
+    changeText(status, defaultHeaderText)
     status.style.color = '#000'
+  }
+
+  function changeText(element, text) {
+    element.innerHTML = text
   }
   document.body.addEventListener('mouseover', (e) => {
     if (
@@ -48,7 +53,8 @@ window.addEventListener('load', () => {
         boundaries.forEach((boundary) => {
           boundary.style.backgroundColor = '#eeeeee'
         })
-        status.innerText = defaultHeaderText
+        //change header text
+        changeText(status, defaultHeaderText)
         status.style.color = '#000'
         scoreContainer.style.color = '#000'
       } else if (e.target.matches('.boundary') && isStartHovered) {
@@ -57,9 +63,11 @@ window.addEventListener('load', () => {
           boundary.style.backgroundColor = '#ea0505'
         })
         score -= 10
-        scoreContainer.innerHTML = score
+        //change score value
+        changeText(scoreContainer, score)
         scoreContainer.style.color = '#fff'
-        status.innerText = lostMsg
+        //change message to "you lost"
+        changeText(status, lostMsg)
         status.style.color = '#ea0505'
       } else if (
         e.target.matches('#end') &&
@@ -68,9 +76,11 @@ window.addEventListener('load', () => {
         !isBoundaryTouched
       ) {
         score += 5
-        scoreContainer.innerHTML = score
+        //change score value
+        changeText(scoreContainer, score)
         scoreContainer.style.color = '#000'
-        status.innerText = wonMsg
+        //change message to "you won"
+        changeText(status, wonMsg)
         status.style.color = '#08660e'
         isStartHovered = false
         isBoundaryTouched = false
